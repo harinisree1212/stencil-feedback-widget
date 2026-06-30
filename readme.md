@@ -1,3 +1,47 @@
+==> Component API
+I used the Component API in my Star Rating component. I used @Props (max,label, disabled) to receive data, @Event (ratingChange) to send the selected rating, and @Methods like getValue() and reset() to get or reset the rating. This helped the component communicate with other parts of the project.
+
+==>Decorators
+I used decorators like @Component, @Prop, @State, @Event, @Watch, and @Method in star-rating.tsx. They helped me create the component, receive values, store data, send events, watch changes, and create methods.
+
+==>Lifecycle Hooks
+I used componentWillLoad() and componentDidLoad() in my project. componentWillLoad() runs before the component loads, and componentDidLoad() runs after the component is displayed. These helped me know when the component starts and finishes loading.
+
+
+==>Lifecycle Methods
+I used componentWillRender(), componentDidRender(), and disconnectedCallback() in my component. These methods helped me know when the component is rendering, when it finishes rendering, and when it is removed from the page.
+
+==>Form Components and Callbacks
+I used the Star Rating component inside a feedback form. I used addEventListener('submit') to submit the form, addEventListener('ratingChange')` to get the selected rating, and reset() to clear the rating.
+
+==>Functional Components and Props
+I created a RatingSummary functional component. It receives value and max as props and shows the selected rating. It only displays data and does not store any state.
+
+==>Host / Fragment
+I used Host in star-rating.tsx to add classes to the <star-rating> component. I used Fragment in rating-summary.tsx to return multiple elements without adding an extra <div>.
+
+==>Methods
+I created getValue() and reset() methods using @Method. getValue() returns the selected rating, and reset() clears the selected and hovered ratings.
+
+==>States
+I used @State() selected and @State() hovered in my component. selected stores the user's selected rating, and hovered stores the star that the user is pointing at with the mouse. When these values change, the UI updates automatically.
+
+
+==>Shadow DOM and Styling
+I used shadow: true in @Component and added styles in star-rating.css. This kept my component styles separate from the rest of the webpage and avoided CSS conflicts.
+
+==>JSX
+I used JSX in the render() methods of star-rating.tsx and rating-summary.tsx. JSX helped me write HTML-like code inside TypeScript to display the stars, labels, and rating summary.
+
+==>React JS Integration
+I used the Stencil component in a React application by calling defineCustomElements() and using the <star-rating> component. I also used useEffect(), ref, and the reset() method to work with the component in React.
+
+==>Stencil CLI
+I used the Stencil CLI commands like pnpm create stencil, pnpm generate, pnpm start, pnpm build, and pnpm test. These commands helped me create the project, create components, run the project, build it, and test it.
+
+
+
+
 [![Built With Stencil](https://img.shields.io/badge/-Built%20With%20Stencil-16161d.svg?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI%2BCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI%2BCgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU%2BCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00MjQuNywzNzMuOWMwLDM3LjYtNTUuMSw2OC42LTkyLjcsNjguNkgxODAuNGMtMzcuOSwwLTkyLjctMzAuNy05Mi43LTY4LjZ2LTMuNmgzMzYuOVYzNzMuOXoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTQyNC43LDI5Mi4xSDE4MC40Yy0zNy42LDAtOTIuNy0zMS05Mi43LTY4LjZ2LTMuNkgzMzJjMzcuNiwwLDkyLjcsMzEsOTIuNyw2OC42VjI5Mi4xeiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNDI0LjcsMTQxLjdIODcuN3YtMy42YzAtMzcuNiw1NC44LTY4LjYsOTIuNy02OC42SDMzMmMzNy45LDAsOTIuNywzMC43LDkyLjcsNjguNlYxNDEuN3oiLz4KPC9zdmc%2BCg%3D%3D&colorA=16161d&style=flat-square)](https://stenciljs.com)
 
 # Stencil Component Starter
