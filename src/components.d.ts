@@ -10,16 +10,36 @@ export namespace Components {
         /**
           * The first name
          */
-        "first": string;
+        "first"?: string;
         /**
           * The last name
          */
-        "last": string;
+        "last"?: string;
         /**
           * The middle name
          */
-        "middle": string;
+        "middle"?: string;
     }
+    interface StarRating {
+        /**
+          * @default false
+         */
+        "disabled": boolean;
+        "getValue": () => Promise<number>;
+        /**
+          * @default 'Rate your experience'
+         */
+        "label": string;
+        /**
+          * @default 5
+         */
+        "max": number;
+        "reset": () => Promise<void>;
+    }
+}
+export interface StarRatingCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLStarRatingElement;
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -28,8 +48,26 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLStarRatingElementEventMap {
+        "ratingChange": number;
+    }
+    interface HTMLStarRatingElement extends Components.StarRating, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLStarRatingElementEventMap>(type: K, listener: (this: HTMLStarRatingElement, ev: StarRatingCustomEvent<HTMLStarRatingElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLStarRatingElementEventMap>(type: K, listener: (this: HTMLStarRatingElement, ev: StarRatingCustomEvent<HTMLStarRatingElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLStarRatingElement: {
+        prototype: HTMLStarRatingElement;
+        new (): HTMLStarRatingElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
+        "star-rating": HTMLStarRatingElement;
     }
 }
 declare namespace LocalJSX {
@@ -47,15 +85,36 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface StarRating {
+        /**
+          * @default false
+         */
+        "disabled"?: boolean;
+        /**
+          * @default 'Rate your experience'
+         */
+        "label"?: string;
+        /**
+          * @default 5
+         */
+        "max"?: number;
+        "onRatingChange"?: (event: StarRatingCustomEvent<number>) => void;
+    }
 
     interface MyComponentAttributes {
         "first": string;
         "middle": string;
         "last": string;
     }
+    interface StarRatingAttributes {
+        "max": number;
+        "label": string;
+        "disabled": boolean;
+    }
 
     interface IntrinsicElements {
         "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
+        "star-rating": Omit<StarRating, keyof StarRatingAttributes> & { [K in keyof StarRating & keyof StarRatingAttributes]?: StarRating[K] } & { [K in keyof StarRating & keyof StarRatingAttributes as `attr:${K}`]?: StarRatingAttributes[K] } & { [K in keyof StarRating & keyof StarRatingAttributes as `prop:${K}`]?: StarRating[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -63,6 +122,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "star-rating": LocalJSX.IntrinsicElements["star-rating"] & JSXBase.HTMLAttributes<HTMLStarRatingElement>;
         }
     }
 }

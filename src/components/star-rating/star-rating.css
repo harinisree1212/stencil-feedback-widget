@@ -1,0 +1,44 @@
+:host {
+  display: block;
+  font-family: sans-serif;
+  max-width: 280px;
+}
+
+:host(.is-disabled) {
+  opacity: 0.5;
+}
+
+.label {
+  font-size: 14px;
+  color: #444;
+  margin: 0 0 8px;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  color: #ccc;
+  padding: 0;
+}
+
+.star:disabled {
+  cursor: not-allowed;
+}
+
+.star.filled {
+  color: gold;
+}
+
+.confirmation {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #2a8f4d;
+}

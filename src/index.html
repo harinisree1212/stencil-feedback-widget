@@ -1,14 +1,61 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stencil Feedback Widget Demo</title>
+  <script type="module" src="/build/stencil-feedback-widget.esm.js"></script>
+</head>
+<body>
 
-    <script type="module" src="/build/stencil-feedback-widget.esm.js"></script>
-    <script nomodule src="/build/stencil-feedback-widget.js"></script>
-  </head>
-  <body>
-    <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
-  </body>
+  <h1>Checkout Feedback</h1>
+
+  <form id="feedback-form">
+    <star-rating max="5" label="How was your checkout experience?"></star-rating>
+    <br />
+    <button type="submit">Submit Feedback</button>
+    <button type="button" id="reset-btn">Reset</button>
+  </form>
+
+  <p id="output"></p>
+
+  <script>
+    // Wait until the browser has fully registered AND upgraded
+    // the <star-rating> custom element before touching it.
+    // Without this, methods like getValue()/reset() may not exist yet.
+    customElements.whenDefined('star-rating').then(() => {
+      const rating = document.querySelector('star-rating');
+      const form = document.getElementById('feedback-form');
+      const resetBtn = document.getElementById('reset-btn');
+      const output = document.getElementById('output');
+
+      // Listen for the custom event emitted by @Event() ratingChange
+      rating.addEventListener('ratingChange', (e) => {
+        console.log('User selected:', e.detail);
+      });
+
+      // Handle form submit — prevent page reload, call the @Method()
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        try {
+          const value = await rating.getValue();
+          console.log('getValue() returned:', value);
+          output.textContent = `Thanks! You submitted a rating of ${value} / 5`;
+        } catch (err) {
+          console.error('Error calling getValue():', err);
+        }
+      });
+
+      // Handle reset button — call the @Method() reset()
+      resetBtn.addEventListener('click', async () => {
+        try {
+          await rating.reset();
+          output.textContent = '';
+        } catch (err) {
+          console.error('Error calling reset():', err);
+        }
+      });
+    });
+  </script>
+
+</body>
 </html>
